@@ -1,8 +1,0 @@
-{
-  "image": "archlinux/base:latest",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
-  "extensions": [],
-  "postCreateCommand": "sudo pacman -Syu --noconfirm"
-}
