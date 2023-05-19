@@ -1,0 +1,11 @@
+{
+  "name": "Arch Linux",
+  "image": "archlinux-devcontainer",
+  "settings": {},
+  "extensions": [],
+  "containerEnv": {
+    "TZ": "UTC"
+  },
+  "postCreateCommand": "sudo pacman -Syu --noconfirm",
+  "workspaceMount": "source=/workspace,target=/workspace,type=bind,consistency=cached"
+}
