@@ -1,10 +1,6 @@
 FROM archlinux
 
-RUN pacman -Sy --noconfirm archlinux-keyring && \
-    pacman-key --init && \
-    pacman -Scc --noconfirm && \
-    pacman-key --populate archlinux && \
-    pacman -Syu --noconfirm && \
+RUN pacman -Syu --noconfirm && \
     pacman -S --needed --noconfirm \
     base-devel git fakeroot nodejs go meson sudo cargo jdk-openjdk
 
@@ -24,5 +20,4 @@ RUN git clone https://github.com/nvm-sh/nvm.git && \
 
 RUN touch /root/.bashrc && \
     touch /home/vscode/.bashrc
-
 USER root
