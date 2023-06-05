@@ -7,18 +7,14 @@ RUN pacman -Syu --noconfirm && \
 RUN useradd -m -G wheel vscode
 
 COPY setup-sudo.sh /
-RUN bash setup-sudo.sh && \
-    rm setup-sudo.sh
+
+RUN echo -e "\n\
+pacman-key --init && \\\n\
+pacman-key --populate archlinux && \\\n\
+pacman -Syu --noconfirm\n\
+" >> /etc/bash.bashrc
 
 USER vscode
-
-# import keyring and populate the archlinux keys
-RUN sudo pacman-key --init && \
-    sudo pacman-key --populate archlinux
-
-RUN sudo pacman -Syu --noconfirm
-
-USER root
 
 RUN git clone https://github.com/nvm-sh/nvm.git && \
     cd nvm && \
