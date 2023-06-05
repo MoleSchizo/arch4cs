@@ -1,18 +1,20 @@
 FROM archlinux
 
-RUN pacman -Syu --noconfirm && \
+RUN pacman -Sy --noconfirm archlinux-keyring && \
+    pacman-key --recv-key 'Pierre Schmitz <pierre@archlinux.org>' && \
+    pacman-key --init && \
+    pacman-key --lsign-key 'Pierre Schmitz <pierre@archlinux.org>' && \
+    pacman -Scc --noconfirm && \
+    pacman-key --populate archlinux && \
+    pacman -Syu --noconfirm && \
     pacman -S --needed --noconfirm \
     base-devel git fakeroot nodejs go meson sudo cargo jdk-openjdk
 
 RUN useradd -m -G wheel vscode
 
 COPY setup-sudo.sh /
-
-RUN echo -e "\n\
-pacman-key --init && \\\n\
-pacman-key --populate archlinux && \\\n\
-pacman -Syu --noconfirm\n\
-" >> /etc/bash.bashrc
+RUN bash setup-sudo.sh && \
+    rm setup-sudo.sh
 
 USER vscode
 
