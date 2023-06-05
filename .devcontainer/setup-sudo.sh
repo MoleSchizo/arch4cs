@@ -1,1 +1,1 @@
-echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
