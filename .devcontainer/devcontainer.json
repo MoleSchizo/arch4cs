@@ -1,18 +1,10 @@
 {
-  "image": "archlinux/base",
+  "image": "significant2500/unofficial-github-codespaces-image:full-archlinux-rolling",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "containerEnv": {
-    "USER": "vscode"
-  },
-  "runArgs": [
-    "--user",
-    "vscode"
-  ],
-  "extensions": [
-    "ms-vscode.go",
-    "redhat.java"
-  ],
-  "postCreateCommand": "sudo bash /setup-sudo.sh"
+  "extensions": [],
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ]
 }
