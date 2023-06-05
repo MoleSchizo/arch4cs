@@ -1,5 +1,18 @@
 {
-    "image": "significant2500/unofficial-github-codespaces-image:full-archlinux-rolling",
-    "features": {
-    }
-  }
+  "image": "archlinux/base",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "containerEnv": {
+    "USER": "vscode"
+  },
+  "runArgs": [
+    "--user",
+    "vscode"
+  ],
+  "extensions": [
+    "ms-vscode.go",
+    "redhat.java"
+  ],
+  "postCreateCommand": "sudo bash /setup-sudo.sh"
+}
