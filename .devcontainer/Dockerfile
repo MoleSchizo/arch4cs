@@ -1,9 +1,7 @@
 FROM archlinux
 
 RUN pacman -Sy --noconfirm archlinux-keyring && \
-    pacman-key --recv-key 'Pierre Schmitz <pierre@archlinux.org>' && \
     pacman-key --init && \
-    pacman-key --lsign-key 'Pierre Schmitz <pierre@archlinux.org>' && \
     pacman -Scc --noconfirm && \
     pacman-key --populate archlinux && \
     pacman -Syu --noconfirm && \
