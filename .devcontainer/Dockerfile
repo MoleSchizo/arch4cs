@@ -1,9 +1,6 @@
 FROM archlinux
 
-COPY fix-keys.sh /usr/local/bin/fix-keys.sh
-RUN chmod +x /usr/local/bin/fix-keys.sh
-
-RUN /usr/local/bin/update-system.sh && \
+RUN pacman -Syu --noconfirm && \
     pacman -S --needed --noconfirm \
     base-devel git fakeroot nodejs go meson sudo cargo jdk-openjdk
 
