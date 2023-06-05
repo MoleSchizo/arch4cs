@@ -12,6 +12,14 @@ RUN bash setup-sudo.sh && \
 
 USER vscode
 
+# import keyring and populate the archlinux keys
+RUN sudo pacman-key --init && \
+    sudo pacman-key --populate archlinux
+
+RUN sudo pacman -Syu --noconfirm
+
+USER root
+
 RUN git clone https://github.com/nvm-sh/nvm.git && \
     cd nvm && \
     bash install.sh && \
@@ -20,4 +28,5 @@ RUN git clone https://github.com/nvm-sh/nvm.git && \
 
 RUN touch /root/.bashrc && \
     touch /home/vscode/.bashrc
+
 USER root
