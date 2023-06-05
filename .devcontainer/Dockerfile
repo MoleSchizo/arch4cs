@@ -1,12 +1,20 @@
-FROM archlinux
-RUN pacman -Syu --noconfirm \
-    && pacman -S --needed --noconfirm htop base-devel git fakeroot nodejs go meson sudo cargo jdk-openjdk
+FROM archlinux/base
+
+RUN pacman -Syu --needed --noconfirm \
+    base-devel git fakeroot nodejs go meson sudo cargo jdk-openjdk
+
 RUN useradd -m -G wheel vscode
+
 COPY setup-sudo.sh /
-RUN bash setup-sudo.sh
-RUN rm setup-sudo.sh
+RUN chmod +x /setup-sudo.sh
+
+USER vscode
+
+RUN bash /setup-sudo.sh
 RUN git clone https://github.com/nvm-sh/nvm
-RUN touch /root/.bashrc
-RUN su -l vscode -c 'touch .bashrc'
-RUN bash nvm/install.sh
-RUN su -l vscode -c 'bash /nvm/install.sh'
+RUN touch /home/vscode/.bashrc
+RUN bash /nvm/install.sh
+
+WORKDIR /home/vscode
+
+CMD ["bash"]
